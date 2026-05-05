@@ -4,9 +4,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mac Portfolio</title>
+<title>Mac Portfolio Ultimate</title>
 
 <style>
+/* ===== BASE ===== */
 body {
   margin: 0;
   font-family: -apple-system, sans-serif;
@@ -17,120 +18,204 @@ body {
   background-size: cover;
 }
 
-/* SPLASH */
+/* ===== SPLASH ===== */
 #splash {
   position: fixed;
-  width: 100%;
-  height: 100%;
-  background: rgb(104, 103, 103);
+  inset: 0;
+  background: #000;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
   z-index: 9999;
-  transition: opacity 0.5s;
+  transition: opacity .4s;
 }
-.logo img { width: 90px; }
-.loader { width: 200px; height: 5px; background: #333; margin-top:20px;}
-.bar { height:100%; width:0; background:white; animation:loading 3s forwards;}
-@keyframes loading { to{width:100%;} }
+.logo img {
+  width: 90px;
+  filter: drop-shadow(0 0 20px rgba(255,255,255,.6));
+}
+.loader {
+  width: 220px; height: 4px; background:#333; border-radius: 10px; margin-top:20px; overflow:hidden;
+}
+.bar {
+  height:100%; width:0; background:#fff; border-radius:10px; animation: loading 2.6s forwards;
+}
+@keyframes loading { to { width: 100%; } }
 
-/* TOPBAR */
+/* ===== TOPBAR ===== */
 .topbar {
-  height:30px;
+  height: 30px;
   display:flex;
   justify-content:space-between;
-  padding:5px 15px;
-  background:rgba(255,255,255,0.08);
+  align-items:center;
+  padding: 5px 15px;
+  background: rgba(255,255,255,0.08);
   backdrop-filter: blur(20px);
+  font-size: 13px;
 }
 
-/* ICONS */
+/* ===== DESKTOP ICONS ===== */
 .desktop-icons {
   position:absolute;
-  top:60px;
-  left:20px;
-  display:flex;
-  flex-direction:column;
-  gap:25px;
+  top:60px; left:20px;
+  display:flex; flex-direction:column; gap:18px;
 }
-.icon { text-align:center; cursor:pointer; }
+.icon { text-align:center; cursor:pointer; user-select:none; }
 .icon img {
-  width:40px;
-  border-radius:14px;
+  width:42px;
+  border-radius:12px;
   padding:4px;
-  background:rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.1);
+  transition:.2s;
 }
-.icon:hover img { transform:scale(1.2); }
+.icon:hover img { transform: scale(1.15) translateY(-2px); }
+.icon p { font-size:11px; margin:4px 0 0; }
 
-/* DOCK */
+/* ===== DOCK ===== */
 .dock {
   position:fixed;
-  bottom:20px;
-  left:50%;
-  transform:translateX(-50%);
-  padding:12px 25px;
-  background:rgba(255,255,255,0.1);
-  backdrop-filter:blur(20px);
-  border-radius:30px;
-  display:flex;
-  gap:20px;
+  bottom:20px; left:50%; transform:translateX(-50%);
+  padding:12px 24px;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(20px);
+  border-radius: 30px;
+  display:flex; gap:18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
 }
-.dock img { width:60px; }
+.dock img {
+  width:48px; transition: transform .2s;
+}
+.dock img:hover {
+  transform: scale(1.6) translateY(-8px);
+}
 
-/* WINDOWS */
+/* ===== WINDOWS ===== */
 .window {
   position:absolute;
-  width:80vw;
-  height:80vh;
-  max-width:1000px;
-  max-height:700px;
-  background:rgba(255,255,255,0.08);
-  backdrop-filter:blur(25px);
+  width:80vw; height:80vh;
+  max-width:1000px; max-height:700px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(25px);
   border-radius:16px;
   display:none;
   flex-direction:column;
-  z-index:1;
+  overflow:hidden;
+  box-shadow: 0 20px 50px rgba(0,0,0,.35);
+  animation: openAnim .18s ease;
 }
 
-.window-header {
-  padding:10px;
-  background:rgba(255,255,255,0.05);
+.chrome-home {
   display:flex;
-  justify-content:space-between;
-  cursor:move;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  height:100%;
+  gap:25px;
 }
 
-.window-body {
-  flex:1;
-  padding:10px;
-  overflow:auto;
+.google-logo {
+  width:180px;
 }
 
-/* TERMINAL */
-#terminalOutput {
-  font-family: monospace;
-}
-#terminalInput {
-  padding:10px;
-  background:black;
-  color:white;
+.search-box input {
+  width:400px;
+  padding:12px 20px;
+  border-radius:30px;
   border:none;
   outline:none;
-  width:100%;
+  background:rgba(255,255,255,0.15);
+  color:white;
 }
 
-/* CHROME */
-.chrome-nav { display:flex; gap:5px; padding:5px;}
-#urlBar { flex:1; padding:8px; border-radius:20px; border:none;}
+.shortcuts {
+  display:flex;
+  gap:20px;
+}
+
+.shortcut {
+  text-align:center;
+  cursor:pointer;
+}
+
+.shortcut img {
+  width:40px;
+}
+
+.shortcut span {
+  display:block;
+  font-size:12px;
+  margin-top:5px;
+}
+@keyframes openAnim {
+  from { transform: scale(.92); opacity:0; }
+  to { transform: scale(1); opacity:1; }
+}
+.window.maximized {
+  width:100vw !important; height:100vh !important;
+  top:0 !important; left:0 !important; border-radius:0;
+}
+
+/* ===== HEADER + MAC BUTTONS ===== */
+.window-header {
+  display:flex; align-items:center;
+  padding:8px 12px;
+  background: rgba(255,255,255,0.05);
+  cursor: move;
+}
+.window-controls { display:flex; gap:8px; }
+.window-controls span {
+  width:12px; height:12px; border-radius:50%; display:inline-block;
+}
+.close { background:#ff5f57; cursor:pointer; }
+.minimize { background:#ffbd2e; cursor:pointer; }
+.maximize { background:#28c840; cursor:pointer; }
+.window-title { margin-left:12px; font-size:13px; opacity:.85; }
+
+.window-body { flex:1; padding:10px; overflow:auto; }
+
+/* ===== TERMINAL ===== */
+#terminalOutput { font-family: monospace; }
+#terminalInput {
+  padding:10px; width:100%;
+  background:#000; color:#fff; border:none; outline:none;
+}
+
+/* ===== CHROME ===== */
+.chrome-nav { display:flex; gap:6px; padding:6px; }
+.chrome-nav button {
+  background: rgba(255,255,255,0.12);
+  border:none; color:#fff; border-radius:6px; padding:4px 8px; cursor:pointer;
+}
+#urlBar {
+  flex:1; padding:8px; border-radius:20px; border:none; outline:none;
+  background: rgba(255,255,255,0.15); color:#fff;
+}
 iframe { flex:1; border:none; }
 
-button {
-  background:rgba(255,255,255,0.1);
-  border:none;
-  color:white;
-  border-radius:6px;
-  cursor:pointer;
+/* ===== FINDER GRID ===== */
+.finder-grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px,1fr));
+  gap:20px; padding:10px;
+}
+.finder-item { text-align:center; cursor:pointer; }
+.finder-item img { width:60px; transition:.2s; }
+.finder-item span { display:block; margin-top:6px; font-size:12px; }
+.finder-item:hover img { transform: scale(1.1); }
+
+/* ===== SPOTLIGHT ===== */
+#spotlight {
+  position:fixed; top:20%; left:50%; transform:translateX(-50%);
+  width:420px; display:none;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(25px);
+  border-radius:16px; padding:14px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.4);
+}
+#spotInput {
+  width:100%; padding:10px;
+  border:none; outline:none; border-radius:10px;
+  background: rgba(255,255,255,0.18); color:#fff;
 }
 </style>
 
@@ -138,23 +223,28 @@ button {
 
 <body>
 
-<!-- SPLASH -->
+<!-- ===== SPLASH ===== -->
 
 <div id="splash">
-  <div class="logo"><img src="logo.png"></div>
+  <div class="logo"><img src="logo.png" alt="logo"></div>
   <div class="loader"><div class="bar"></div></div>
 </div>
-
 <audio id="bootSound" src="startup.mp3"></audio>
 
-<!-- TOPBAR -->
+<!-- ===== TOPBAR ===== -->
 
 <div class="topbar">
   <div>Agesh K S</div>
   <div id="time"></div>
 </div>
 
-<!-- ICONS -->
+<!-- ===== SPOTLIGHT ===== -->
+
+<div id="spotlight">
+  <input id="spotInput" placeholder="Search apps... (Terminal, Chrome, Finder, CV)">
+</div>
+
+<!-- ===== DESKTOP ICONS ===== -->
 
 <div class="desktop-icons">
   <div class="icon" onclick="openApp('terminal')">
@@ -169,59 +259,118 @@ button {
   <div class="icon" onclick="openApp('cvWindow')">
     <img src="https://img.icons8.com/fluency/96/pdf.png"><p>My CV</p>
   </div>
+
+  <div class="icon" onclick="openInChrome('https://www.linkedin.com/in/ageshks/')">
+    <img src="https://img.icons8.com/fluency/96/linkedin.png"><p>LinkedIn</p>
+  </div>
+  <div class="icon" onclick="openInChrome('https://www.indeed.com')">
+    <img src="https://img.icons8.com/fluency/96/indeed.png"><p>Indeed</p>
+  </div>
 </div>
 
-<!-- TERMINAL -->
+<!-- ===== TERMINAL ===== -->
 
-<div class="window" id="terminal">
+<div class="window" id="terminal" style="top:100px; left:200px;">
   <div class="window-header" onmousedown="drag(event,this.parentElement)">
-    Terminal <button onclick="closeApp('terminal')">✖</button>
+    <div class="window-controls">
+      <span class="close" onclick="closeApp('terminal')"></span>
+      <span class="minimize" onclick="minimizeApp('terminal')"></span>
+      <span class="maximize" onclick="toggleMaximize('terminal')"></span>
+    </div>
+    <div class="window-title">Terminal</div>
   </div>
   <div id="terminalOutput" class="window-body"><p>> Welcome</p></div>
   <input id="terminalInput" type="text" autocomplete="off" placeholder="type command...">
 </div>
 
-<!-- FINDER -->
+<!-- ===== FINDER ===== -->
 
-<div class="window" id="finder">
+<div class="window" id="finder" style="top:120px; left:240px;">
   <div class="window-header" onmousedown="drag(event,this.parentElement)">
-    Finder <button onclick="closeApp('finder')">✖</button>
+    <div class="window-controls">
+      <span class="close" onclick="closeApp('finder')"></span>
+      <span class="minimize" onclick="minimizeApp('finder')"></span>
+      <span class="maximize" onclick="toggleMaximize('finder')"></span>
+    </div>
+    <div class="window-title">Finder</div>
   </div>
-  <div class="window-body">
-    <p>🚀 Travel App</p>
-    <p>🎮 Jet Game</p>
+
+  <div class="window-body finder-grid">
+    <div class="finder-item" onclick="openInChrome('https://example.com')">
+      <img src="https://img.icons8.com/fluency/96/flutter.png"><span>Travel App</span>
+    </div>
+    <div class="finder-item" onclick="openInChrome('https://example.com')">
+      <img src="https://img.icons8.com/fluency/96/controller.png"><span>Jet Game</span>
+    </div>
+    <div class="finder-item">
+      <img src="https://img.icons8.com/fluency/96/lock.png"><span>Auth App</span>
+    </div>
   </div>
 </div>
 
-<!-- CHROME -->
-
-<div class="window" id="chrome">
+<!-- ===== CHROME ===== -->
+<div class="window" id="chrome" style="top:80px; left:160px;">
   <div class="window-header" onmousedown="drag(event,this.parentElement)">
-    Chrome <button onclick="closeApp('chrome')">✖</button>
+    <div class="window-controls">
+      <span class="close" onclick="closeApp('chrome')"></span>
+      <span class="minimize" onclick="minimizeApp('chrome')"></span>
+      <span class="maximize" onclick="toggleMaximize('chrome')"></span>
+    </div>
+    <div class="window-title">Chrome</div>
   </div>
+
   <div class="chrome-nav">
     <button onclick="goBack()">←</button>
     <button onclick="goForward()">→</button>
     <button onclick="refreshPage()">⟳</button>
-    <input id="urlBar">
+    <input id="urlBar" placeholder="Search or enter website">
   </div>
-  <iframe id="browser"></iframe>
+
+  <!-- HOME -->
+  <div id="chromeHome" class="chrome-home">
+    <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_light_color_272x92dp.png" class="google-logo">
+
+    <div class="search-box">
+      <input id="homeSearch" placeholder="Search Google or type a URL">
+    </div>
+
+    <div class="shortcuts">
+      <div class="shortcut" onclick="openInChrome('https://youtube.com')">
+        <img src="https://img.icons8.com/fluency/48/youtube-play.png">
+        <span>YouTube</span>
+      </div>
+
+      <div class="shortcut" onclick="openInChrome('https://github.com')">
+        <img src="https://img.icons8.com/fluency/48/github.png">
+        <span>GitHub</span>
+      </div>
+
+      <div class="shortcut" onclick="openInChrome('https://stackoverflow.com')">
+        <img src="https://img.icons8.com/fluency/48/stackoverflow.png">
+        <span>Stack</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BROWSER -->
+  <iframe id="browser" style="display:none;"></iframe>
 </div>
 
-<!-- CV -->
+<!-- ===== CV ===== -->
 
-<div class="window" id="cvWindow">
+<div class="window" id="cvWindow" style="top:140px; left:280px;">
   <div class="window-header" onmousedown="drag(event,this.parentElement)">
-    My CV
-    <div>
-      <button onclick="downloadCV()">⬇</button>
-      <button onclick="closeApp('cvWindow')">✖</button>
+    <div class="window-controls">
+      <span class="close" onclick="closeApp('cvWindow')"></span>
+      <span class="minimize" onclick="minimizeApp('cvWindow')"></span>
+      <span class="maximize" onclick="toggleMaximize('cvWindow')"></span>
     </div>
+    <div class="window-title">My CV</div>
   </div>
   <iframe src="Ageshks.pdf"></iframe>
 </div>
 
-<!-- DOCK -->
+<!-- ===== DOCK ===== -->
 
 <div class="dock">
   <img src="https://img.icons8.com/fluency/96/console.png" onclick="openApp('terminal')">
@@ -229,110 +378,177 @@ button {
 </div>
 
 <script>
-setInterval(()=>document.getElementById("time").innerText=new Date().toLocaleTimeString(),1000);
+/* ===== TIME (date + time) ===== */
+setInterval(()=>{
+  const now = new Date();
+  const time = now.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+  const date = now.toLocaleDateString([], {weekday:'short', month:'short', day:'numeric'});
+  document.getElementById("time").innerText = `${date}  ${time}`;
+},1000);
 
+/* ===== WINDOW SYSTEM ===== */
 let zIndex = 10;
+
+function bringToFront(el){ el.style.zIndex = ++zIndex; }
 
 function openApp(id){
   const el = document.getElementById(id);
   el.style.display = "flex";
-  el.style.zIndex = ++zIndex;
-
+  bringToFront(el);
   if(id === "terminal"){
-    setTimeout(()=>{
-      const input = document.getElementById("terminalInput");
-      input.focus();
-    },150);
+    setTimeout(()=>document.getElementById("terminalInput").focus(),100);
   }
 }
 
 function closeApp(id){
-  document.getElementById(id).style.display="none";
+  document.getElementById(id).style.display = "none";
 }
 
-function drag(e,el){
-  el.style.zIndex = ++zIndex;
+function minimizeApp(id){
+  document.getElementById(id).style.display = "none";
+}
 
-  let x=e.clientX-el.offsetLeft,y=e.clientY-el.offsetTop;
+function toggleMaximize(id){
+  const el = document.getElementById(id);
+  el.classList.toggle("maximized");
+  bringToFront(el);
+}
+
+/* DRAG */
+function drag(e, el){
+  bringToFront(el);
+  const x = e.clientX - el.offsetLeft;
+  const y = e.clientY - el.offsetTop;
+
   function move(ev){
-    el.style.left=ev.pageX-x+"px";
-    el.style.top=ev.pageY-y+"px";
+    el.style.left = (ev.pageX - x) + "px";
+    el.style.top  = (ev.pageY - y) + "px";
   }
-  document.addEventListener("mousemove",move);
-  document.onmouseup=()=>document.removeEventListener("mousemove",move);
+  document.addEventListener("mousemove", move);
+  document.onmouseup = ()=> document.removeEventListener("mousemove", move);
 }
 
-// TERMINAL
-const terminalInput=document.getElementById("terminalInput");
-const terminalOutput=document.getElementById("terminalOutput");
+/* ===== TERMINAL ===== */
+const input = document.getElementById("terminalInput");
+const output = document.getElementById("terminalOutput");
 
-document.getElementById("terminal").addEventListener("click",()=>{
-  terminalInput.focus();
-});
+document.getElementById("terminal").addEventListener("click",()=>input.focus());
 
-terminalInput.addEventListener("keydown",function(e){
-  if(e.key==="Enter"){
-    let cmd=terminalInput.value.trim();
-    terminalOutput.innerHTML+=`<p>> ${cmd}</p>`;
-    runCommand(cmd);
-    terminalInput.value="";
-    terminalOutput.scrollTop=terminalOutput.scrollHeight;
-  }
-});
+input.addEventListener("keydown", e=>{
+  if(e.key === "Enter"){
+    const cmd = input.value.trim();
+    output.innerHTML += `<p>> ${cmd}</p>`;
 
-function runCommand(cmd){
-  if(cmd==="help"){
-    terminalOutput.innerHTML+=`<p>help | about | open chrome | open finder | open cv | clear</p>`;
-  } else if(cmd==="about"){
-    terminalOutput.innerHTML+=`<p>Agesh K S - Flutter Developer 🚀</p>`;
-  } else if(cmd==="open chrome"){ openApp("chrome"); }
-  else if(cmd==="open finder"){ openApp("finder"); }
-  else if(cmd==="open cv"){ openApp("cvWindow"); }
-  else if(cmd==="clear"){ terminalOutput.innerHTML=""; }
-  else{
-    terminalOutput.innerHTML+=`<p>command not found</p>`;
-  }
-}
+    if(cmd==="help"){
+      output.innerHTML += `<p>help | about | open chrome | open finder | open cv | clear</p>`;
+    } else if(cmd==="about"){
+      output.innerHTML += `<p>Agesh K S - Flutter Developer 🚀</p>`;
+    } else if(cmd==="open chrome"){ openApp("chrome"); }
+    else if(cmd==="open finder"){ openApp("finder"); }
+    else if(cmd==="open cv"){ openApp("cvWindow"); }
+    else if(cmd==="clear"){ output.innerHTML = ""; }
+    else { output.innerHTML += `<p>command not found</p>`; }
 
-// CHROME
-const urlBar=document.getElementById("urlBar");
-const browser=document.getElementById("browser");
-
-urlBar.addEventListener("keydown",e=>{
-  if(e.key==="Enter"){
-    let v=urlBar.value;
-    browser.src=v.includes(".")?(v.startsWith("http")?v:"https://"+v)
-    :"https://www.bing.com/search?q="+encodeURIComponent(v);
+    input.value = "";
+    output.scrollTop = output.scrollHeight;
   }
 });
 
-function goBack(){ browser.contentWindow.history.back(); }
-function goForward(){ browser.contentWindow.history.forward(); }
-function refreshPage(){ browser.contentWindow.location.reload(); }
+/* ===== CHROME ===== */
+const urlBar = document.getElementById("urlBar");
+const browser = document.getElementById("browser");
+const chromeHome = document.getElementById("chromeHome");
 
-function downloadCV(){
-  const a=document.createElement("a");
-  a.href="Ageshks.pdf";
-  a.download="Ageshks.pdf";
-  a.click();
+// open chrome
+function openInChrome(url){
+  openApp("chrome");
+
+  chromeHome.style.display = "none";
+  browser.style.display = "block";
+
+  // blocked sites fix
+  if(url.includes("linkedin.com") || url.includes("indeed.com")){
+    window.open(url, "_blank");
+    return;
+  }
+
+  browser.src = url;
 }
 
-// SPLASH FIX
-window.onload=()=>{
-  const splash=document.getElementById("splash");
+// url bar search
+urlBar.addEventListener("keydown", e=>{
+  if(e.key === "Enter"){
+    chromeHome.style.display = "none";
+    browser.style.display = "block";
 
+    let v = urlBar.value.trim();
+
+    browser.src = v.includes(".")
+      ? (v.startsWith("http") ? v : "https://" + v)
+      : "https://www.google.com/search?q=" + encodeURIComponent(v);
+  }
+});
+
+// homepage search
+document.getElementById("homeSearch").addEventListener("keydown", e=>{
+  if(e.key === "Enter"){
+    openInChrome(e.target.value);
+  }
+});
+
+// navigation
+function goBack(){ try{ browser.contentWindow.history.back(); }catch(e){} }
+function goForward(){ try{ browser.contentWindow.history.forward(); }catch(e){} }
+function refreshPage(){ try{ browser.contentWindow.location.reload(); }catch(e){} }
+
+// when opening chrome → show home
+const oldOpenApp = openApp;
+openApp = function(id){
+  oldOpenApp(id);
+
+  if(id === "chrome"){
+    chromeHome.style.display = "flex";
+    browser.style.display = "none";
+  }
+};
+
+/* ===== SPOTLIGHT ===== */
+const spotlight = document.getElementById("spotlight");
+const spotInput = document.getElementById("spotInput");
+
+document.addEventListener("keydown", (e)=>{
+  if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k"){
+    e.preventDefault();
+    spotlight.style.display = "block";
+    spotInput.focus();
+  }
+});
+
+spotInput.addEventListener("keydown", (e)=>{
+  if(e.key === "Enter"){
+    const v = spotInput.value.toLowerCase();
+    if(v.includes("terminal")) openApp("terminal");
+    else if(v.includes("chrome")) openApp("chrome");
+    else if(v.includes("finder")) openApp("finder");
+    else if(v.includes("cv")) openApp("cvWindow");
+
+    spotlight.style.display = "none";
+    spotInput.value = "";
+  }
+});
+
+/* ===== SPLASH ===== */
+window.onload = ()=>{
+  const splash = document.getElementById("splash");
   setTimeout(()=>{
-    splash.style.opacity="0";
-    splash.style.pointerEvents="none";
-  },3000);
-
-  setTimeout(()=>{
-    splash.style.display="none";
-  },3500);
+    splash.style.opacity = "0";
+    splash.style.pointerEvents = "none";
+  }, 2400);
+  setTimeout(()=> splash.style.display = "none", 2900);
 
   setTimeout(()=>{
     document.getElementById("bootSound").play().catch(()=>{});
-  },500);
+  }, 400);
 };
 </script>
 
