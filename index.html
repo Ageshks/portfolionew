@@ -13,7 +13,6 @@ body {
   height: 100vh;
   overflow: hidden;
   color: white;
-
   background: url("back.jpg") no-repeat center center;
   background-size: cover;
 }
@@ -23,169 +22,115 @@ body {
   position: fixed;
   width: 100%;
   height: 100%;
-  background: rgb(98, 97, 97);
+  background: black;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   z-index: 9999;
+  transition: opacity 0.5s;
 }
+.logo img { width: 90px; }
+.loader { width: 200px; height: 5px; background: #333; margin-top:20px;}
+.bar { height:100%; width:0; background:white; animation:loading 3s forwards;}
+@keyframes loading { to{width:100%;} }
 
-.logo img {
-  width: 90px;
-  animation: fadeIn 1.5s ease;
-}
-
-.loader {
-  width: 200px;
-  height: 5px;
-  background: #333;
-  margin-top: 20px;
-}
-
-.bar {
-  height: 100%;
-  width: 0%;
-  background: white;
-  animation: loading 3s forwards;
-}
-
-@keyframes loading { to { width: 100%; } }
-@keyframes fadeIn { from{opacity:0} to{opacity:1} }
-
-/* TOP BAR */
+/* TOPBAR */
 .topbar {
-  height: 30px;
-  display: flex;
-  justify-content: space-between;
-  padding: 5px 15px;
-  background: rgba(255,255,255,0.08);
+  height:30px;
+  display:flex;
+  justify-content:space-between;
+  padding:5px 15px;
+  background:rgba(255,255,255,0.08);
   backdrop-filter: blur(20px);
 }
 
-/* DESKTOP */
+/* ICONS */
 .desktop-icons {
-  position: absolute;
-  top: 60px;
-  left: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
+  position:absolute;
+  top:60px;
+  left:20px;
+  display:flex;
+  flex-direction:column;
+  gap:25px;
 }
-
-.icon {
-  text-align: center;
-  cursor: pointer;
-}
-
+.icon { text-align:center; cursor:pointer; }
 .icon img {
-  width: 60px;
-  border-radius: 14px;
-  padding: 6px;
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(10px);
-  transition: 0.25s;
+  width:60px;
+  border-radius:14px;
+  padding:6px;
+  background:rgba(255,255,255,0.1);
 }
-
-.icon:hover img {
-  transform: scale(1.2) translateY(-5px);
-}
-
-.icon p {
-  font-size: 12px;
-}
+.icon:hover img { transform:scale(1.2); }
 
 /* DOCK */
 .dock {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 12px 25px;
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(25px);
-  border-radius: 30px;
-  display: flex;
-  gap: 20px;
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  padding:12px 25px;
+  background:rgba(255,255,255,0.1);
+  backdrop-filter:blur(20px);
+  border-radius:30px;
+  display:flex;
+  gap:20px;
 }
-
-.dock img {
-  width: 60px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.dock img:hover {
-  transform: scale(1.3);
-}
+.dock img { width:60px; }
 
 /* WINDOWS */
 .window {
-  position: absolute;
-  width: 80vw;
-  height: 80vh;
-  max-width: 1000px;
-  max-height: 700px;
-
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(25px);
-
-  border-radius: 16px;
-  display: none;
-  flex-direction: column;
-  overflow: hidden;
-
-  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+  position:absolute;
+  width:80vw;
+  height:80vh;
+  max-width:1000px;
+  max-height:700px;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(25px);
+  border-radius:16px;
+  display:none;
+  flex-direction:column;
+  z-index:1;
 }
 
 .window-header {
-  padding: 10px;
-  background: rgba(255,255,255,0.05);
-  display: flex;
-  justify-content: space-between;
-  cursor: move;
+  padding:10px;
+  background:rgba(255,255,255,0.05);
+  display:flex;
+  justify-content:space-between;
+  cursor:move;
 }
 
 .window-body {
-  flex: 1;
-  padding: 10px;
-  overflow: auto;
+  flex:1;
+  padding:10px;
+  overflow:auto;
 }
 
 /* TERMINAL */
+#terminalOutput {
+  font-family: monospace;
+}
 #terminalInput {
-  padding: 10px;
-  background: black;
-  color: white;
-  border: none;
+  padding:10px;
+  background:black;
+  color:white;
+  border:none;
+  outline:none;
+  width:100%;
 }
 
 /* CHROME */
-.chrome-nav {
-  display: flex;
-  gap: 5px;
-  padding: 5px;
-}
+.chrome-nav { display:flex; gap:5px; padding:5px;}
+#urlBar { flex:1; padding:8px; border-radius:20px; border:none;}
+iframe { flex:1; border:none; }
 
-#urlBar {
-  flex: 1;
-  padding: 8px;
-  border-radius: 20px;
-  border: none;
-}
-
-iframe {
-  flex: 1;
-  border: none;
-}
-
-/* BUTTON */
 button {
-  background: rgba(255,255,255,0.1);
-  border: none;
-  color: white;
-  border-radius: 6px;
-  cursor: pointer;
+  background:rgba(255,255,255,0.1);
+  border:none;
+  color:white;
+  border-radius:6px;
+  cursor:pointer;
 }
 </style>
 
@@ -196,9 +141,7 @@ button {
 <!-- SPLASH -->
 
 <div id="splash">
-  <div class="logo">
-    <img src="logo.png">
-  </div>
+  <div class="logo"><img src="logo.png"></div>
   <div class="loader"><div class="bar"></div></div>
 </div>
 
@@ -211,30 +154,21 @@ button {
   <div id="time"></div>
 </div>
 
-<!-- DESKTOP -->
+<!-- ICONS -->
 
 <div class="desktop-icons">
-
   <div class="icon" onclick="openApp('terminal')">
-    <img src="https://img.icons8.com/fluency/96/console.png">
-    <p>Terminal</p>
+    <img src="https://img.icons8.com/fluency/96/console.png"><p>Terminal</p>
   </div>
-
   <div class="icon" onclick="openApp('chrome')">
-    <img src="https://img.icons8.com/fluency/96/chrome.png">
-    <p>Chrome</p>
+    <img src="https://img.icons8.com/fluency/96/chrome.png"><p>Chrome</p>
   </div>
-
   <div class="icon" onclick="openApp('finder')">
-    <img src="https://img.icons8.com/fluency/96/folder-invoices.png">
-    <p>Finder</p>
+    <img src="https://img.icons8.com/fluency/96/folder-invoices.png"><p>Finder</p>
   </div>
-
   <div class="icon" onclick="openApp('cvWindow')">
-    <img src="https://img.icons8.com/fluency/96/pdf.png">
-    <p>My CV</p>
+    <img src="https://img.icons8.com/fluency/96/pdf.png"><p>My CV</p>
   </div>
-
 </div>
 
 <!-- TERMINAL -->
@@ -243,10 +177,8 @@ button {
   <div class="window-header" onmousedown="drag(event,this.parentElement)">
     Terminal <button onclick="closeApp('terminal')">✖</button>
   </div>
-  <div id="terminalOutput" class="window-body">
-    <p>> Welcome</p>
-  </div>
-  <input id="terminalInput">
+  <div id="terminalOutput" class="window-body"><p>> Welcome</p></div>
+  <input id="terminalInput" type="text" autocomplete="off" placeholder="type command...">
 </div>
 
 <!-- FINDER -->
@@ -267,14 +199,12 @@ button {
   <div class="window-header" onmousedown="drag(event,this.parentElement)">
     Chrome <button onclick="closeApp('chrome')">✖</button>
   </div>
-
   <div class="chrome-nav">
     <button onclick="goBack()">←</button>
     <button onclick="goForward()">→</button>
     <button onclick="refreshPage()">⟳</button>
-    <input id="urlBar" placeholder="Search or enter website">
+    <input id="urlBar">
   </div>
-
   <iframe id="browser"></iframe>
 </div>
 
@@ -299,38 +229,86 @@ button {
 </div>
 
 <script>
-setInterval(()=>time.innerText=new Date().toLocaleTimeString(),1000);
+setInterval(()=>document.getElementById("time").innerText=new Date().toLocaleTimeString(),1000);
 
-function openApp(id){ document.getElementById(id).style.display="flex"; }
-function closeApp(id){ document.getElementById(id).style.display="none"; }
+let zIndex = 10;
+
+function openApp(id){
+  const el = document.getElementById(id);
+  el.style.display = "flex";
+  el.style.zIndex = ++zIndex;
+
+  if(id === "terminal"){
+    setTimeout(()=>{
+      const input = document.getElementById("terminalInput");
+      input.focus();
+    },150);
+  }
+}
+
+function closeApp(id){
+  document.getElementById(id).style.display="none";
+}
 
 function drag(e,el){
+  el.style.zIndex = ++zIndex;
+
   let x=e.clientX-el.offsetLeft,y=e.clientY-el.offsetTop;
-  function move(ev){ el.style.left=ev.pageX-x+"px"; el.style.top=ev.pageY-y+"px";}
+  function move(ev){
+    el.style.left=ev.pageX-x+"px";
+    el.style.top=ev.pageY-y+"px";
+  }
   document.addEventListener("mousemove",move);
   document.onmouseup=()=>document.removeEventListener("mousemove",move);
 }
 
-terminalInput.addEventListener("keydown",e=>{
+// TERMINAL
+const terminalInput=document.getElementById("terminalInput");
+const terminalOutput=document.getElementById("terminalOutput");
+
+document.getElementById("terminal").addEventListener("click",()=>{
+  terminalInput.focus();
+});
+
+terminalInput.addEventListener("keydown",function(e){
   if(e.key==="Enter"){
-    let cmd=e.target.value;
+    let cmd=terminalInput.value.trim();
     terminalOutput.innerHTML+=`<p>> ${cmd}</p>`;
-    if(cmd==="open chrome") openApp("chrome");
-    e.target.value="";
+    runCommand(cmd);
+    terminalInput.value="";
+    terminalOutput.scrollTop=terminalOutput.scrollHeight;
   }
 });
+
+function runCommand(cmd){
+  if(cmd==="help"){
+    terminalOutput.innerHTML+=`<p>help | about | open chrome | open finder | open cv | clear</p>`;
+  } else if(cmd==="about"){
+    terminalOutput.innerHTML+=`<p>Agesh K S - Flutter Developer 🚀</p>`;
+  } else if(cmd==="open chrome"){ openApp("chrome"); }
+  else if(cmd==="open finder"){ openApp("finder"); }
+  else if(cmd==="open cv"){ openApp("cvWindow"); }
+  else if(cmd==="clear"){ terminalOutput.innerHTML=""; }
+  else{
+    terminalOutput.innerHTML+=`<p>command not found</p>`;
+  }
+}
+
+// CHROME
+const urlBar=document.getElementById("urlBar");
+const browser=document.getElementById("browser");
 
 urlBar.addEventListener("keydown",e=>{
   if(e.key==="Enter"){
     let v=urlBar.value;
-    browser.src=v.includes(".")? (v.startsWith("http")?v:"https://"+v)
+    browser.src=v.includes(".")?(v.startsWith("http")?v:"https://"+v)
     :"https://www.bing.com/search?q="+encodeURIComponent(v);
   }
 });
 
-function goBack(){ browser.contentWindow.history.back();}
-function goForward(){ browser.contentWindow.history.forward();}
-function refreshPage(){ browser.contentWindow.location.reload();}
+function goBack(){ browser.contentWindow.history.back(); }
+function goForward(){ browser.contentWindow.history.forward(); }
+function refreshPage(){ browser.contentWindow.location.reload(); }
 
 function downloadCV(){
   const a=document.createElement("a");
@@ -339,9 +317,22 @@ function downloadCV(){
   a.click();
 }
 
+// SPLASH FIX
 window.onload=()=>{
-  setTimeout(()=>document.getElementById("splash").style.display="none",3000);
-  setTimeout(()=>bootSound.play().catch(()=>{}),500);
+  const splash=document.getElementById("splash");
+
+  setTimeout(()=>{
+    splash.style.opacity="0";
+    splash.style.pointerEvents="none";
+  },3000);
+
+  setTimeout(()=>{
+    splash.style.display="none";
+  },3500);
+
+  setTimeout(()=>{
+    document.getElementById("bootSound").play().catch(()=>{});
+  },500);
 };
 </script>
 
