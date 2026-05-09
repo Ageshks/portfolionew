@@ -263,8 +263,8 @@ iframe { flex:1; border:none; }
   <div class="icon" onclick="openInChrome('https://www.linkedin.com/in/ageshks/')">
     <img src="https://img.icons8.com/fluency/96/linkedin.png"><p>LinkedIn</p>
   </div>
-  <div class="icon" onclick="openInChrome('https://www.indeed.com')">
-    <img src="https://img.icons8.com/fluency/96/indeed.png"><p>Indeed</p>
+  <div class="icon" onclick="openInChrome('https://github.com/ageshks')">
+    <img src="https://img.icons8.com/fluency/96/github.png"><p>GitHub</p>
   </div>
 </div>
 
@@ -459,20 +459,39 @@ const urlBar = document.getElementById("urlBar");
 const browser = document.getElementById("browser");
 const chromeHome = document.getElementById("chromeHome");
 
-// open chrome
 function openInChrome(url){
   openApp("chrome");
 
   chromeHome.style.display = "none";
   browser.style.display = "block";
 
-  // blocked sites fix
-  if(url.includes("linkedin.com") || url.includes("indeed.com")){
-    window.open(url, "_blank");
+  // if not full URL, treat as search
+  if(!url.includes(".")){
+    browser.src = "https://www.google.com/search?q=" + encodeURIComponent(url);
     return;
   }
 
+  // normalize URL
+  if(!url.startsWith("http")){
+    url = "https://" + url;
+  }
+
+  // Try loading in iframe
   browser.src = url;
+
+  // Fallback: if blocked → open in new tab
+  setTimeout(() => {
+    try {
+      const current = browser.contentWindow.location.href;
+
+      // if iframe fails or redirects weirdly → open externally
+      if (!current.includes(url)) {
+        window.open(url, "_blank");
+      }
+    } catch (e) {
+      window.open(url, "_blank");
+    }
+  }, 1200);
 }
 
 // url bar search
