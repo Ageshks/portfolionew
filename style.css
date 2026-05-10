@@ -3,79 +3,40 @@ body {
   font-family: -apple-system, sans-serif;
   height: 100vh;
   overflow: hidden;
-
-  /* Gradient like your image */
-  background: linear-gradient(135deg, #6a11cb, #ff758c);
-}
-
-/* Top bar */
-.topbar {
-  height: 30px;
-  display: flex;
-  justify-content: space-between;
-  padding: 5px 15px;
   color: white;
-  background: rgba(255,255,255,0.15);
-  backdrop-filter: blur(10px);
-  font-size: 14px;
+  background: url("assets/back.jpg") no-repeat center center;
+  background-size: cover;
 }
 
-.name {
-  margin-left: 5px;
+/* splash */
+#splash {
+  position: fixed;
+  inset: 0;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Desktop icons */
-.desktop-icons {
+/* window */
+.window {
   position: absolute;
-  top: 50px;
-  left: 20px;
-  display: flex;
+  width: 80vw;
+  height: 80vh;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(20px);
+  display: none;
   flex-direction: column;
-  gap: 20px;
 }
 
-.icon {
-  text-align: center;
-  color: white;
-  cursor: pointer;
-}
-
-.icon img {
-  width: 45px;
-  transition: 0.3s;
-}
-
-.icon:hover img {
-  transform: scale(1.2);
-}
-
-.icon p {
-  font-size: 12px;
-  margin-top: 5px;
-}
-
-/* Dock */
+/* dock */
 .dock {
   position: fixed;
-  bottom: 15px;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  padding: 10px 20px;
-
-  background: rgba(255,255,255,0.2);
-  backdrop-filter: blur(20px);
-  border-radius: 20px;
-
   display: flex;
   gap: 20px;
 }
 
-.dock img {
-  width: 45px;
-  transition: 0.3s;
-  cursor: pointer;
-}
-
-.dock img:hover {
-  transform: scale(1.4);
-}
+/* more styles from your file... */

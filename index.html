@@ -127,6 +127,29 @@ body {
   color:white;
 }
 
+
+.contact-info {
+  margin-bottom: 20px;
+}
+
+.contact-info h2 {
+  margin-bottom: 10px;
+}
+
+.contact-info a {
+  color: #85C1E9;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.contact-info a:hover {
+  color: #2ECC71;
+  text-decoration: underline;
+}
+
+
+
+
 .shortcuts {
   display:flex;
   gap:20px;
@@ -179,6 +202,8 @@ body {
   padding:10px; width:100%;
   background:#000; color:#fff; border:none; outline:none;
 }
+
+
 
 /* ===== CHROME ===== */
 .chrome-nav { display:flex; gap:6px; padding:6px; }
@@ -253,19 +278,24 @@ iframe { flex:1; border:none; }
   <div class="icon" onclick="openApp('chrome')">
     <img src="https://img.icons8.com/fluency/96/chrome.png"><p>Chrome</p>
   </div>
-  <div class="icon" onclick="openApp('finder')">
-    <img src="https://img.icons8.com/fluency/96/folder-invoices.png"><p>Finder</p>
-  </div>
+ <div class="icon" onclick="openApp('finder')">
+  <img src="image.png">
+  <p>Finder</p>
+</div>
   <div class="icon" onclick="openApp('cvWindow')">
     <img src="https://img.icons8.com/fluency/96/pdf.png"><p>My CV</p>
   </div>
 
-  <div class="icon" onclick="openInChrome('https://www.linkedin.com/in/ageshks/')">
+ <div class="icon" onclick="window.open('https://www.linkedin.com/in/ageshks/', '_blank')">
     <img src="https://img.icons8.com/fluency/96/linkedin.png"><p>LinkedIn</p>
   </div>
-  <div class="icon" onclick="openInChrome('https://github.com/ageshks')">
-    <img src="https://img.icons8.com/fluency/96/github.png"><p>GitHub</p>
+  <div class="icon" onclick="window.open('https://github.com/ageshks', '_blank')">
+    <img src="https://img.icons8.com/ios-filled/100/000000/github.png"><p>GitHub</p>
   </div>
+  <div class="icon" onclick="openApp('contactWindow')">
+  <img src="https://img.icons8.com/fluency/96/new-post.png">
+  <p>Contact</p>
+</div>
 </div>
 
 <!-- ===== TERMINAL ===== -->
@@ -355,7 +385,40 @@ iframe { flex:1; border:none; }
   <!-- BROWSER -->
   <iframe id="browser" style="display:none;"></iframe>
 </div>
+<div class="window" id="contactWindow" style="top:120px; left:260px;">
+  <div class="window-header" onmousedown="drag(event,this.parentElement)">
+    <div class="window-controls">
+      <span class="close" onclick="closeApp('contactWindow')"></span>
+      <span class="minimize" onclick="minimizeApp('contactWindow')"></span>
+      <span class="maximize" onclick="toggleMaximize('contactWindow')"></span>
+    </div>
+    <div class="window-title">Contact</div>
+  </div>
 
+  <div class="window-body">
+
+    <div class="contact-info">
+      <h2>Contact Me</h2>
+
+      <!-- EMAIL -->
+      <p>
+        📧 
+        <a href="mailto:yourmail@gmail.com">
+          yourmail@gmail.com
+        </a>
+      </p>
+
+      <!-- WHATSAPP -->
+      <p>
+        📱 
+        <a href="https://wa.me/919876543210" target="_blank">
+          Chat on WhatsApp
+        </a>
+      </p>
+    </div>
+
+  </div>
+</div>
 <!-- ===== CV ===== -->
 
 <div class="window" id="cvWindow" style="top:140px; left:280px;">
@@ -369,6 +432,8 @@ iframe { flex:1; border:none; }
   </div>
   <iframe src="Ageshks.pdf"></iframe>
 </div>
+
+
 
 <!-- ===== DOCK ===== -->
 
@@ -573,6 +638,7 @@ window.onload = ()=>{
 
 </body>
 </html>
+
 
 </script>
 
